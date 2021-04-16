@@ -7,12 +7,14 @@
  */
 
 import React from 'react';
-import LayoutAnimation from './src/LayoutAnimation';
+import SizeAnimation from './src/SizeAnimation';
+import LocationAnimation from './src/LocationAnimation';
 import SimpleAnimation from './src/SimpleAnimation';
+import RotationAnimation from './src/RotationAnimation';
 
 const App = props => {
   return (
-    <LayoutAnimation />
+    <RotationAnimation />
   )
 }
 

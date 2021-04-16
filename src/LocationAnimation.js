@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     },
 });
 
-const LayoutAnimation = props => {
+const SizeAnimation = props => {
 
     const squareContainerPaddingLeft = useRef(new Animated.Value(paddingHorizontal)).current;
 
@@ -78,4 +78,4 @@ const LayoutAnimation = props => {
     );
 };
 
-export default LayoutAnimation;
+export default SizeAnimation;
