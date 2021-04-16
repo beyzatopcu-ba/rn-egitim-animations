@@ -7,11 +7,12 @@
  */
 
 import React from 'react';
+import LayoutAnimation from './src/LayoutAnimation';
 import SimpleAnimation from './src/SimpleAnimation';
 
 const App = props => {
   return (
-    <SimpleAnimation />
+    <LayoutAnimation />
   )
 }
 
