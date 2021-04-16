@@ -11,15 +11,19 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    squareContainer: {
+    squareContainer1: {
         width: width,
         height: squareWidth,
-        backgroundColor: 'pink',
-        justifyContent: 'flex-end',
+        marginBottom: 20,
+    },
+    squareContainer2: {
+        width: width,
+        height: squareWidth,
+        alignItems: 'flex-end',
     },
     square: {
-        height: undefined,
-        aspectRatio: 1,
+        width: squareWidth,
+        height: squareWidth,
         backgroundColor: 'orange',
     },
     button: {
@@ -34,56 +38,72 @@ const styles = StyleSheet.create({
 
 const ParallelAnimation = props => {
 
-    const animationState = useRef(new Animated.Value(0)).current;
+    const squareContainer1PaddingLeft = useRef(new Animated.Value(paddingHorizontal)).current;
+    const squareContainer2PaddingRight = useRef(new Animated.Value(paddingHorizontal)).current;
 
     const _onPress_MoveLeft = () => {
-        let moveLeftAnimation = Animated.timing(
-            animationState,
+        let moveFirstSquareLeftAnimation = Animated.timing(
+            squareContainer1PaddingLeft,
             {
-                toValue: 0,
+                toValue: paddingHorizontal,
                 duration: 500,
                 useNativeDriver: false,
             }
         );
 
-        moveLeftAnimation.start();
+        let moveSecondSquareRightAnimation = Animated.timing(
+            squareContainer2PaddingRight,
+            {
+                toValue: paddingHorizontal,
+                duration: 1000,
+                useNativeDriver: false,
+            }
+        );
+
+        Animated.parallel([
+            moveFirstSquareLeftAnimation,
+            moveSecondSquareRightAnimation
+        ]).start();
     }
 
     const _onPress_MoveRight = () => {
-        let moveRightAnimation = Animated.timing(
-            animationState,
+        let moveFirstSquareRightAnimation = Animated.timing(
+            squareContainer1PaddingLeft,
             {
-                toValue: 1,
+                toValue: width - squareWidth - paddingHorizontal,
                 duration: 500,
                 useNativeDriver: false,
             }
         );
 
-        moveRightAnimation.start();
+        let moveSecondSquareLeftAnimation = Animated.timing(
+            squareContainer2PaddingRight,
+            {
+                toValue: width - squareWidth - paddingHorizontal,
+                duration: 1000,
+                useNativeDriver: false,
+            }
+        );
+
+        Animated.parallel([
+            moveFirstSquareRightAnimation,
+            moveSecondSquareLeftAnimation,
+        ]).start();
     }
-
-    const paddingLeft = animationState.interpolate({
-        inputRange: [0, 1],
-        outputRange: [paddingHorizontal, width - squareWidth - paddingHorizontal],
-    })
-
-    const squareSize = animationState.interpolate({
-        inputRange: [0,1],
-        outputRange: [squareWidth, squareWidth * 1.5],
-    })
 
     return (
         <View style={styles.container}>
             <Animated.View style={[
-                styles.squareContainer,
-                { paddingLeft }
+                styles.squareContainer1,
+                { paddingLeft: squareContainer1PaddingLeft }
             ]}>
-                <Animated.View style={[
-                    styles.square,
-                    {
-                        width: squareSize,
-                    }
-                ]} />
+                <View style={styles.square} />
+            </Animated.View>
+            <Animated.View style={[
+                styles.squareContainer2,
+                { paddingRight: squareContainer2PaddingRight }
+            ]}>
+                <View style={styles.square} />
             </Animated.View>
             <TouchableOpacity style={styles.button} onPress={_onPress_MoveRight}>
                 <Text>Sağa kaydır</Text>
