@@ -12,10 +12,11 @@ import LocationAnimation from './src/LocationAnimation';
 import SimpleAnimation from './src/SimpleAnimation';
 import RotationAnimation from './src/RotationAnimation';
 import ParallelAnimation from './src/ParallelAnimation';
+import OtherComposedAnimations from './src/OtherComposedAnimations';
 
 const App = props => {
   return (
-    <ParallelAnimation />
+    <OtherComposedAnimations />
   )
 }
 
