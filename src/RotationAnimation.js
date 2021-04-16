@@ -47,7 +47,6 @@ const RotationAnimation = props => {
     
     useEffect(() => {
         const listenerId = rotation.addListener(({value}) => {
-            console.log(value);
             rotationValue.current = value;
         });
 

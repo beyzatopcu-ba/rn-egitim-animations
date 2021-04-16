@@ -14,10 +14,12 @@ const styles = StyleSheet.create({
     squareContainer: {
         width: width,
         height: squareWidth,
+        backgroundColor: 'pink',
+        justifyContent: 'flex-end',
     },
     square: {
-        width: squareWidth,
-        height: squareWidth,
+        height: undefined,
+        aspectRatio: 1,
         backgroundColor: 'orange',
     },
     button: {
@@ -30,15 +32,15 @@ const styles = StyleSheet.create({
     },
 });
 
-const LocationAnimation = props => {
+const ParallelAnimation = props => {
 
-    const squareContainerPaddingLeft = useRef(new Animated.Value(paddingHorizontal)).current;
+    const animationState = useRef(new Animated.Value(0)).current;
 
     const _onPress_MoveLeft = () => {
         let moveLeftAnimation = Animated.timing(
-            squareContainerPaddingLeft,
+            animationState,
             {
-                toValue: paddingHorizontal,
+                toValue: 0,
                 duration: 500,
                 useNativeDriver: false,
             }
@@ -49,9 +51,9 @@ const LocationAnimation = props => {
 
     const _onPress_MoveRight = () => {
         let moveRightAnimation = Animated.timing(
-            squareContainerPaddingLeft,
+            animationState,
             {
-                toValue: width - squareWidth - paddingHorizontal,
+                toValue: 1,
                 duration: 500,
                 useNativeDriver: false,
             }
@@ -60,13 +62,28 @@ const LocationAnimation = props => {
         moveRightAnimation.start();
     }
 
+    const paddingLeft = animationState.interpolate({
+        inputRange: [0, 1],
+        outputRange: [paddingHorizontal, width - squareWidth - paddingHorizontal],
+    })
+
+    const squareSize = animationState.interpolate({
+        inputRange: [0,1],
+        outputRange: [squareWidth, squareWidth * 1.5],
+    })
+
     return (
         <View style={styles.container}>
             <Animated.View style={[
                 styles.squareContainer,
-                { paddingLeft: squareContainerPaddingLeft }
+                { paddingLeft }
             ]}>
-                <View style={styles.square} />
+                <Animated.View style={[
+                    styles.square,
+                    {
+                        width: squareSize,
+                    }
+                ]} />
             </Animated.View>
             <TouchableOpacity style={styles.button} onPress={_onPress_MoveRight}>
                 <Text>Sağa kaydır</Text>
@@ -78,4 +95,4 @@ const LocationAnimation = props => {
     );
 };
 
-export default LocationAnimation;
+export default ParallelAnimation;

@@ -11,10 +11,11 @@ import SizeAnimation from './src/SizeAnimation';
 import LocationAnimation from './src/LocationAnimation';
 import SimpleAnimation from './src/SimpleAnimation';
 import RotationAnimation from './src/RotationAnimation';
+import ParallelAnimation from './src/ParallelAnimation';
 
 const App = props => {
   return (
-    <RotationAnimation />
+    <ParallelAnimation />
   )
 }
 
