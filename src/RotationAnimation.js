@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Text, StyleSheet, TouchableOpacity, View, Animated, Easing, Dimensions } from 'react-native';
 
 const {width} = Dimensions.get("window");
@@ -43,13 +43,25 @@ const styles = StyleSheet.create({
 const RotationAnimation = props => {
 
     const rotation = useRef(new Animated.Value(0)).current;
+    const rotationValue = useRef(0);
+    
+    useEffect(() => {
+        const listenerId = rotation.addListener(({value}) => {
+            console.log(value);
+            rotationValue.current = value;
+        });
+
+        return () => {
+            rotation.removeListener(listenerId);
+        }
+    }, []);
 
 
     const _onPress_RotateRight = () => {
         Animated.timing(
             rotation,
             {
-                toValue: 1,
+                toValue: rotationValue.current + 1,
                 duration: 500,
                 useNativeDriver: false,
             }
@@ -60,16 +72,16 @@ const RotationAnimation = props => {
         Animated.timing(
             rotation,
             {
-                toValue: 0,
+                toValue: rotationValue.current - 1,
                 duration: 500,
                 useNativeDriver: false,
             }
         ).start();
     }
 
-    const interpolatedRotation = rotation.interpolate({
-        inputRange: [0, 1],
-        outputRange: ["0deg", "45deg"],
+    const interpolatedRotation = Animated.modulo(rotation, 9).interpolate({
+        inputRange: [0, 8],
+        outputRange: ["0deg", "360deg"],
     });
 
     return (
