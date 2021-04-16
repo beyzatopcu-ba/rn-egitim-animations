@@ -2,6 +2,8 @@ import React, { useRef } from 'react';
 import { Text, StyleSheet, TouchableOpacity, View, Animated, Easing, Dimensions } from 'react-native';
 
 const {width} = Dimensions.get("window");
+const squareWidth = width * 0.3;
+const paddingHorizontal = width * 0.05;
 
 const styles = StyleSheet.create({
     container: {
@@ -11,11 +13,11 @@ const styles = StyleSheet.create({
     },
     squareContainer: {
         width: width,
-        height: 100,
+        height: squareWidth,
     },
     square: {
-        width: 100,
-        height: 100,
+        width: squareWidth,
+        height: squareWidth,
         backgroundColor: 'orange',
     },
     button: {
@@ -30,13 +32,13 @@ const styles = StyleSheet.create({
 
 const LayoutAnimation = props => {
 
-    const squareContainerPaddingLeft = useRef(new Animated.Value(0)).current;
+    const squareContainerPaddingLeft = useRef(new Animated.Value(paddingHorizontal)).current;
 
     const _onPress_MoveLeft = () => {
         let moveLeftAnimation = Animated.timing(
             squareContainerPaddingLeft,
             {
-                toValue: 0,
+                toValue: paddingHorizontal,
                 duration: 500,
                 useNativeDriver: false,
             }
@@ -49,7 +51,7 @@ const LayoutAnimation = props => {
         let moveRightAnimation = Animated.timing(
             squareContainerPaddingLeft,
             {
-                toValue: width - 100,
+                toValue: width - squareWidth - paddingHorizontal,
                 duration: 500,
                 useNativeDriver: false,
             }
