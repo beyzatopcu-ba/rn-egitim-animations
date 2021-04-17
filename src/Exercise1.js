@@ -12,6 +12,14 @@ const minimumMargin = standardMargin;
 const maximumMarginLeft = motionAreaWidth - buttonSize - standardMargin;
 const maximumMarginTop = motionAreaHeight - buttonSize - standardMargin;
 
+// Egzersiz 2 için
+const colors = [
+    "#B36FE5",
+    "#FF7860",
+    "#33A3DE",
+    "#F09E17",
+]
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -49,6 +57,33 @@ const styles = StyleSheet.create({
 });
 
 const Exercise1 = props => {
+
+    // Egzersiz 2 için yorumu kaldırın
+    /*
+    const refColorIndex = useRef(0);
+    const getColorIndex = () => {
+        let nextColorIndex;
+
+        // Renklerin sonuna geldiysek, bir sonraki index 0 olmalı
+        if (refColorIndex.current === colors.length - 1) {
+            nextColorIndex = 0;
+        }
+        else {
+            nextColorIndex = refColorIndex.current + 1;
+        }
+
+        // refColorIndex'i güncelle
+        refColorIndex.current = nextColorIndex;
+
+        // Yeni index'i döndür
+        return nextColorIndex;
+    }
+
+    const calculateRandomMargins = () => {
+        // ...
+    }
+    */
+
 
     const _onPress = () => {
         // ...
