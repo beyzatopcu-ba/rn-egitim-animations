@@ -13,10 +13,18 @@ import SimpleAnimation from './src/SimpleAnimation';
 import RotationAnimation from './src/RotationAnimation';
 import ParallelAnimation from './src/ParallelAnimation';
 import OtherComposedAnimations from './src/OtherComposedAnimations';
+import { Platform, UIManager } from 'react-native';
+import LayoutAnimationExample from './src/LayoutAnimationExample';
+
+if (Platform.OS === 'android') {
+  if (UIManager.setLayoutAnimationEnabledExperimental) {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+  }
+}
 
 const App = props => {
   return (
-    <OtherComposedAnimations />
+    <LayoutAnimationExample />
   )
 }
 
