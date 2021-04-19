@@ -15,6 +15,8 @@ import ParallelAnimation from './src/ParallelAnimation';
 import OtherComposedAnimations from './src/OtherComposedAnimations';
 import { Platform, UIManager } from 'react-native';
 import LayoutAnimationExample from './src/LayoutAnimationExample';
+import Exercise1_Solution from './src/Exercise1_Solution';
+import Exercise2_Solution from './src/Exercise2_Solution';
 
 if (Platform.OS === 'android') {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -24,7 +26,7 @@ if (Platform.OS === 'android') {
 
 const App = props => {
   return (
-    <LayoutAnimationExample />
+    <Exercise1_Solution />
   )
 }
 
