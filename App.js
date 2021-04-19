@@ -17,6 +17,7 @@ import { Platform, UIManager } from 'react-native';
 import LayoutAnimationExample from './src/LayoutAnimationExample';
 import Exercise1_Solution from './src/Exercise1_Solution';
 import Exercise2_Solution from './src/Exercise2_Solution';
+import SlidingUnderline from './src/SlidingUnderline';
 
 if (Platform.OS === 'android') {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -26,7 +27,7 @@ if (Platform.OS === 'android') {
 
 const App = props => {
   return (
-    <Exercise1_Solution />
+    <SlidingUnderline />
   )
 }
 
